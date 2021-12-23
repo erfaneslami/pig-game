@@ -10,6 +10,7 @@ const current1El = document.getElementById("current--1");
 const diceEl = document.querySelector(".dice");
 const btnRollDice = document.querySelector(".btn--roll");
 const btnHold = document.querySelector(".btn--hold");
+const btnNew = document.querySelector(".btn--new");
 
 // INITIAL STATE
 score0El.textContent = 0;
@@ -73,4 +74,26 @@ btnHold.addEventListener("click", function () {
       switchPlayer();
     }
   }
+});
+
+// FUNCTION ON NEW GAME BTN
+btnNew.addEventListener("click", function () {
+  currentScore = 0;
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  runing = true;
+  diceEl.classList.add("hidden");
+  totalScore[0] = 0;
+  totalScore[1] = 0;
+
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.remove("player--winner");
+
+  activePlayer = 0;
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.add("player--active");
 });
