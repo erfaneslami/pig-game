@@ -18,21 +18,59 @@ diceEl.classList.add("hidden");
 const totalScore = [0, 0];
 let currentScore = 0;
 let activePlayer = 0;
+let runing = true;
 
+// FUNCTIONS
+const switchPlayer = function () {
+  currentScore = 0;
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  player0El.classList.toggle("player--active");
+  player1El.classList.toggle("player--active");
+};
+
+// FUNCTION ON ROLL DICE BTN
 btnRollDice.addEventListener("click", function () {
-  const diceRoll = Math.trunc(Math.random() * 6) + 1;
-  diceEl.classList.remove("hidden");
-  diceEl.src = `dice-${diceRoll}.png`;
+  if (runing) {
+    // CALC DICE AND SHOW TO DICE TO SCREEN
+    const diceRoll = Math.trunc(Math.random() * 6) + 1;
+    diceEl.classList.remove("hidden");
+    diceEl.src = `dice-${diceRoll}.png`;
 
-  if (diceRoll !== 1) {
-    currentScore += diceRoll;
-    document.getElementById(`current--${activePlayer}`).textContent =
-      currentScore;
-  } else {
-    currentScore = 0;
-    document.getElementById(`current--${activePlayer}`).textContent = 0;
-    activePlayer = activePlayer === 0 ? 1 : 0;
-    player0El.classList.toggle("player--active");
-    player1El.classList.toggle("player--active");
+    // CHECK IF IT NOT ONE :
+    if (diceRoll !== 1) {
+      currentScore += diceRoll;
+      document.getElementById(`current--${activePlayer}`).textContent =
+        currentScore;
+      // CHECK IF IT  ONE :
+    } else {
+      switchPlayer();
+    }
+  }
+});
+
+// ADD FUNCTION ON HOLD BTN
+btnHold.addEventListener("click", function () {
+  if (runing) {
+    // CALC TOTAL SCORE AND SHOW IT
+    totalScore[activePlayer] += currentScore;
+    document.getElementById(`score--${activePlayer}`).textContent =
+      totalScore[activePlayer];
+
+    // CHECK IF THE PLAYER WINS
+    if (totalScore[activePlayer] >= 100) {
+      runing = false;
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add("player--winner");
+
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove("player--active");
+    }
+    // IF SCORE WAS BELOW 100
+    else {
+      switchPlayer();
+    }
   }
 });
