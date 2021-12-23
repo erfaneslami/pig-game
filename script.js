@@ -90,7 +90,11 @@ btnNew.addEventListener("click", function () {
   score0El.textContent = 0;
   score1El.textContent = 0;
   runing = true;
-  diceEl.classList.add("hidden");
+  // diceEl.classList.add("hidden");
+  const faceDice = document.querySelectorAll("[class^='face']");
+  for (let i = 0; i < faceDice.length; i++) {
+    faceDice[i].classList.add("hidden");
+  }
   totalScore[0] = 0;
   totalScore[1] = 0;
 
