@@ -4,6 +4,7 @@ Hi! my Name is **Erfan eslami**
 
 **pig game** is a simple game in html css and JS
 
+https://erfaneslami.github.io/pig-game/
 ## Game  description
 
 Roll a dice to get score as many as you want 
