@@ -45,12 +45,12 @@ const switchPlayer = function () {
   player1El.classList.toggle("player--active");
 };
 
-const hideDice = function () {
+function hideDice() {
   const faceDice = document.querySelectorAll("[class^='face']");
   for (let i = 0; i < faceDice.length; i++) {
     faceDice[i].classList.add("hidden");
   }
-};
+}
 
 // FUNCTION ON ROLL DICE BTN
 btnRollDice.addEventListener("click", function () {
